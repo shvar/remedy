@@ -9,7 +9,7 @@ import (
 func RunCmd( hostname string, cmd string) (err error) {
 
   user := "root"
-  password := "movefast"
+  password := "m0vefast"
   port := "22"
 
 

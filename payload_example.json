@@ -2,7 +2,7 @@
   "command": "service_restart",
   "payload": {
     "command": "restart",
-    "server": "localhost",
+    "server": "fra.shvar.com",
     "service": "ssh"
   }
 }
