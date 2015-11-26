@@ -1,18 +1,19 @@
 package  main
 
 import (
-  "crypto"
   "golang.org/x/crypto/ssh"
+  "bytes"
+  "errors"
 )
   
 
-func RunCmd( hostname string, cmd string) (err Error) {
+func RunCmd( hostname string, cmd string) (err error) {
 
-  user := 'root'
-  password := 'movefast'
-  port := '22'
+  user := "root"
+  password := "movefast"
+  port := "22"
 
-  return 0, "OK"
+  return errors.New("OK")
 
 
 
@@ -30,14 +31,14 @@ func RunCmd( hostname string, cmd string) (err Error) {
 
   client, err := ssh.Dial("tcp", hostname + ":" + port , config)
   if err != nil {
-      return  "Failed to dial: " + err.Error()
+      return err
   }
   
   // Each ClientConn can support multiple interactive sessions,
   // represented by a Session.
   session, err := client.NewSession()
   if err != nil {
-      return "Failed to create session: " + err.Error()
+      return err
   }
   defer session.Close()
   
@@ -46,7 +47,8 @@ func RunCmd( hostname string, cmd string) (err Error) {
   var b bytes.Buffer
   session.Stdout = &b
   if err := session.Run(cmd); err != nil {
-      return "Failed to run: " + err.Error()
+      return err
   }
  // fmt.Println(b.String())
+  return
 }
