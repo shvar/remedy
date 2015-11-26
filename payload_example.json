@@ -1,5 +1,5 @@
 {
-  "command": "service_restart",
+  "action": "service_restart",
   "payload": {
     "command": "restart",
     "server": "fra.shvar.com",

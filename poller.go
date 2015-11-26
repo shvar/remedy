@@ -6,24 +6,25 @@ import(
   "io/ioutil"
   "log"
   "time"
-
   "encoding/json"
 )
 
 const PollURL = "https://raw.githubusercontent.com/shvar/remedy/master/payload_example.json"
 
-type action struct {
+type payload struct {
   Command string `json:"command"`
   Server string `json:"server"`
   Service string `json:"service"`
 }
 
 type operation struct {
-  Command string `json:"command"`
-  Action action `json:"payload"`
+  ActionName string `json:"action"`
+  Payload payload `json:"payload"`
 }
 
 func main() {
+  config := ReadConfig()
+  log.Println("%s", config)
   for {
     res, err := http.Get(PollURL)
     if err != nil { panic(err) }
@@ -39,11 +40,13 @@ func main() {
     if err != nil { panic(err) }
 
     log.Printf("I have to execute %s for service '%s' on server '%s' with service command '%s'\n", 
-      WhatToDo.Command, 
-      WhatToDo.Action.Service,
-      WhatToDo.Action.Server,
-      WhatToDo.Action.Command)
-
+      WhatToDo.ActionName, 
+      WhatToDo.Payload.Service,
+      WhatToDo.Payload.Server,
+      WhatToDo.Payload.Command)
+ 
+    err = RunCmd( WhatToDo.Payload.Server, WhatToDo.Payload.Service + " " + WhatToDo.Payload.Command) 
+    panic(err)
     time.Sleep(time.Minute)
   }
 }

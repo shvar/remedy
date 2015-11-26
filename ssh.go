@@ -27,6 +27,7 @@ func RunCmd( hostname string, cmd string) (err error) {
 
   client, err := ssh.Dial("tcp", hostname + ":" + port , config)
   if err != nil {
+      panic(err)
       return err
   }
   
@@ -34,6 +35,7 @@ func RunCmd( hostname string, cmd string) (err error) {
   // represented by a Session.
   session, err := client.NewSession()
   if err != nil {
+      panic( err)
       return err
   }
   defer session.Close()
@@ -43,6 +45,7 @@ func RunCmd( hostname string, cmd string) (err error) {
   var b bytes.Buffer
   session.Stdout = &b
   if err := session.Run(cmd); err != nil {
+      panic(err)
       return err
   }
  // fmt.Println(b.String())
