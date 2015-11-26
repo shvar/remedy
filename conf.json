@@ -1,0 +1,11 @@
+{
+  "Services" : {
+    "action" : "service_restart",
+    "payload" : {
+        "command" : "restart",
+        "service" : "",
+        "server" : ""
+    }
+
+  }
+}
