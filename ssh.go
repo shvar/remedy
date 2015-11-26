@@ -3,7 +3,6 @@ package  main
 import (
   "golang.org/x/crypto/ssh"
   "bytes"
-  "errors"
 )
   
 
@@ -12,9 +11,6 @@ func RunCmd( hostname string, cmd string) (err error) {
   user := "root"
   password := "movefast"
   port := "22"
-
-  return errors.New("OK")
-
 
 
   // An SSH client is represented with a ClientConn. Currently only
