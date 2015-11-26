@@ -1,4 +1,8 @@
 {
-  "command": "ssh",
-  "payload": "/etc/init.d/ssh restart"
+  "command": "service_restart",
+  "payload": {
+    "command": "restart",
+    "server": "localhost",
+    "service": "ssh"
+  }
 }
