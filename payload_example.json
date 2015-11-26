@@ -1,0 +1,4 @@
+{
+  "command": "ssh",
+  "payload": "/etc/init.d/ssh restart"
+}
