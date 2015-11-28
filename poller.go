@@ -23,8 +23,6 @@ type operation struct {
 }
 
 func main() {
-  config := ReadConfig()
-  log.Println("%s", config)
   for {
     res, err := http.Get(PollURL)
     if err != nil { panic(err) }
@@ -45,8 +43,9 @@ func main() {
       WhatToDo.Payload.Server,
       WhatToDo.Payload.Command)
  
-    err = RunCmd( WhatToDo.Payload.Server, WhatToDo.Payload.Service + " " + WhatToDo.Payload.Command) 
-    panic(err)
+    err = RunCmd(WhatToDo.Payload.Server, "service " + WhatToDo.Payload.Service + " " + WhatToDo.Payload.Command)
+    if err != nil { panic(err) }
+    log.Printf("Executed!\n")
     time.Sleep(time.Minute)
   }
 }
